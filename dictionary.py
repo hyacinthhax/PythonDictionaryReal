@@ -17,12 +17,18 @@ regex_patterns = {
 
 def run():
     deffList = []
-    count = 0
+
+    def innerFunction(word):
+        if word != "":
+            print(word)
+            dictionary[word] = " ".join(deffList)
+
     with open('dictionary.txt', 'r') as f:
         for lines in f.readlines():
             originalDictionary.append(lines)
         
     with open('words.txt', 'r') as fr:
+        count = 0
         for line in originalDictionary:
             for key, value in regex_patterns.items():
                 intent = key
@@ -30,26 +36,29 @@ def run():
                 found_match = re.match(regex_pattern, line)
                 if found_match:
                     if intent == 'word':
-                        time.sleep(0.03)
-                        deffList = []
                         count +=1
+                        word = fr.readline(count).strip('\n')
+                        innerFunction(word)
+                        deffList = []
+                        # time.sleep(0.01)
                         
-                    elif intent == 'deff':
-                        # print("Def Found")
-                        data = found_match.groups()[0]
+                        
+                    else:
+                        data = line.strip('\n')
                         deffList.append(data)
 
-                    elif intent == 'defcont':
-                        # print("Def Found")
-                        data = found_match.groups()[0]
-                        deffList.append(data)
-                    
-                elif fr.readline(count).strip('\n') not in dictionary:
-                    word = fr.readline(count).strip('\n')
-                    dictionary[word] = " ".join(deffList)
+                
+                else:
+                    data = line.strip('\n')
+                    deffList.append(data)
 
 
 run()
-# print(list(dictionary))
-with open('DictionaryReal.py', 'w+') as fw:
-    fw.write(f'pythonDictionary = {dictionary}')
+print(list(dictionary))
+
+
+with open('DictionaryReal.py', 'a') as fw:
+    fw.write('pydictionary = {\n')
+    for key, value in dictionary.items():
+        fw.write(f'{key}: {value},\n')
+    fw.write('}')
