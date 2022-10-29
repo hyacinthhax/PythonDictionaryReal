@@ -36,8 +36,8 @@ def run():
                 found_match = re.match(regex_pattern, line)
                 if found_match:
                     if intent == 'word':
+                        word = found_match.groups()[0]
                         count +=1
-                        word = fr.readline(count).strip('\n')
                         innerFunction(word)
                         deffList = []
                         # time.sleep(0.01)
@@ -45,12 +45,14 @@ def run():
                         
                     else:
                         data = line.strip('\n')
-                        deffList.append(data)
+                        if data not in deffList:
+                            deffList.append(data)
 
                 
                 else:
                     data = line.strip('\n')
-                    deffList.append(data)
+                    if data not in deffList:
+                        deffList.append(data)
 
 
 run()
