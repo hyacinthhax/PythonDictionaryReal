@@ -17,18 +17,23 @@ def cleaner(text):
     # print(list(raw_text))
 
     for sentences in text.split():
+        x = 0
         for letters in sentences:
-            # re.sub(" +", " ", letters)
-            if letters in removespace:
-                new = letters.replace(letters, ' ')
-                clean_text.append(new)
+            if x != 0:
+                clean_text.append(' ')
 
-            elif letters in removenon:
-                new = letters.replace(letters, '')
-                clean_text.append(new)
+            elif x == 0:
+                if letters in removespace:
+                    new = letters.replace(letters, ' ')
+                    clean_text.append(new)
 
-            elif letters not in removenon and letters not in removespace:
-                clean_text.append(letters.lower())
+                elif letters in removenon:
+                    new = letters.replace(letters, '')
+                    clean_text.append(new)
+
+            x+=1
+
+        clean_text.append(sentences)
 
     # print(clean_text)
     new = ''.join(clean_text)
