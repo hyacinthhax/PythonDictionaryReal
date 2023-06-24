@@ -6,15 +6,18 @@ wordsList = []
 defList = []
 originalDictionary = []
 definition = ""
+word = ""
 newDict = {}
 
-with open('Dictionary/dictionary.txt', 'r') as f:
+with open('dictionary.txt', 'r') as f:
 	for lines in f.readlines():
 		originalDictionary.append(lines)
 # print(list(originalDictionary))
-    
+
 regex_patterns = {
-	'word': r"(\w+)\n",
+	'word': r"(\w+( |-)*\w*)\n",
+	'definition': r"(Defn: .*)\n",
+	'otherDefs': r"(.* .* .*)"
 }
 
 for lines in originalDictionary:
@@ -24,20 +27,32 @@ for lines in originalDictionary:
 			intent = key
 			regex_pattern = value
 			found_match = re.match(regex_pattern, lines)
+
 			if found_match:
 				if intent == 'word':
-					definition = ""
 					count = +1
 					word = found_match.groups()[0]
-					wordsList.append(word)
-					testset = 0
+					if word != '':
+						wordsList.append(word)
+					if word not in wordsList:
+						testset = 0
+					elif word in wordsList:
+						testset = 1
 
-			else:
-				testset = 1
-				definition = definition + " " + lines.strip('\n')
-	newDict[word] = definition
+				if intent == 'definition':
+					testset = 1
+					definition = found_match.groups()[0] + " "
+
+				if intent == 'otherDefs':
+					testset = 1
+					definition = definition + found_match.groups()[0] + " "
+
+
+		newDict[word] = definition
 	# defList.append(definition)
 
+# testset = 1
+# definition = definition + " " + lines.strip('\n')
 
 # while True:
 # 	print(newDict[input("Word:  ").upper()])
