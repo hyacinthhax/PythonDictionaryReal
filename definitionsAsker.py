@@ -15,11 +15,11 @@ while True:
     word = input("-->")
     try:
         if word == "":
-            randnumber = random.randint(0, 103136)
+            randnumber = random.randint(0, 94251)
             randomword = wordList[randnumber]
             print(f"{randomword}:{list(realDict[randomword])}")
         elif word != "":
-            print(f"{word.upper()}: {list(realDict[word.upper()])}")
+            print(f"{word.upper()}: {realDict[word.upper()][0]}")
 
         input("Enter to Continue...  ")
 
