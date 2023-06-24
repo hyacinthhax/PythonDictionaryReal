@@ -12,7 +12,7 @@ def run():
     # print(len(list(wordList)))
     # This secttion is for instant run
     while True:
-        randnumber = random.randint(0, 103136)
+        randnumber = random.randint(0, 94251)
         try:
             randomword = wordList[randnumber]
             word = input("Press Enter To Continue...  \nOr Ask a Follow up word...  >")
