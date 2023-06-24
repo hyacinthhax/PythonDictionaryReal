@@ -16,8 +16,7 @@ with open('dictionary.txt', 'r') as f:
 
 regex_patterns = {
 	'word': r"(\w+( |-)*\w*)\n",
-	'definition': r"(Defn: .*)\n",
-	'otherDefs': r"(.* .* .*)"
+	'definition': r"(.+ .+ .+ .*)\n"
 }
 
 for lines in originalDictionary:
@@ -33,34 +32,27 @@ for lines in originalDictionary:
 					count = +1
 					word = found_match.groups()[0]
 					if word != '':
-						wordsList.append(word)
-					if word not in wordsList:
-						testset = 0
-					elif word in wordsList:
-						testset = 1
+						if word not in wordsList:
+							wordsList.append(word)
+							definition = ""
+							testset = 0
+						elif word in wordsList:
+							testset = 1
 
 				if intent == 'definition':
-					testset = 1
-					definition = found_match.groups()[0] + " "
-
-				if intent == 'otherDefs':
 					testset = 1
 					definition = definition + found_match.groups()[0] + " "
 
 
 		newDict[word] = definition
-	# defList.append(definition)
 
-# testset = 1
-# definition = definition + " " + lines.strip('\n')
 
-# while True:
-# 	print(newDict[input("Word:  ").upper()])
-# print(len(list(wordsList)))
-# print(list(defList))
-# 
 with open('Dictionary.py', 'w') as fw:
 	fw.write("realDict = {\n")
 	for words, definitions in newDict.items():
 		fw.write(f"'{words}':{cleaner(definitions)},\n")
 	fw.write('}')
+
+with open('words.txt', 'w') as fww:
+	for keys in newDict.keys():
+		fww.write(f"{keys}\n")
