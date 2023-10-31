@@ -5,7 +5,6 @@ dictionary = {}
 
 regex_patterns = {
     'word': r'([A-Z-]+)\n',
-    'restricted': r'-+'
 }
 
 def parseDefinition(definition_line):
