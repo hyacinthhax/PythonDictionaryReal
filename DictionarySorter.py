@@ -15,7 +15,7 @@ with open('dictionary.txt', 'r') as f:
 # print(list(originalDictionary))
 
 regex_patterns = {
-	'word': r"(\w+( |-)*\w*)\n",
+	'word': r'([A-Z-]+)\n',
 	'definition': r"(.+ .+ .+ .*)\n"
 }
 
