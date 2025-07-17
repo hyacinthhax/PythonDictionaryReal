@@ -2,6 +2,8 @@
 This is a simple python dictionary project to turn a dictionary into a python dictionary. This is for offline use, and can be made to a word a day program. I need to change some of the definitions, some of them are rather dated or rely on notes for the word. For instance definition linking like 'scientist' is smaller than 'scientific'. I also added a new program to look up words individually.
 You will need this file to use as it's too large to upload, just a real python dictionary
 
+The Original Gutenburg Project can be found here for full download; From the Summary Section:  http://www.gutenberg.org/ebooks/673
+
 The Easier TXT file was found here:  https://github.com/sujithps/Dictionary
 The ORIGINAL TXT file was found here:  https://www.gutenberg.org/ebooks/673
 
